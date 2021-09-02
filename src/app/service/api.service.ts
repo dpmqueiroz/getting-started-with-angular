@@ -9,16 +9,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
- urlapi: string;
 constructor( private httpClient: HttpClient ) {
-  this.urlapi = `${environment.apiUrl}`
 }
 
-  getDeckDraw(deckId: string = "new", numberOfCards: number = 5): Observable<Draw> {
-    return this.httpClient.get<Draw>(`${this.urlapi}/deck/${deckId}/draw/?count=${numberOfCards}`);
+  getDeckDraw(deckId: string = "new", numberOfCards: number = 12): Observable<Draw> {
+    console.log("entrei no getDeckDraw");
+    return this.httpClient.get<Draw>(`${environment.apiUrl}/deck/${deckId}/draw/?count=${numberOfCards}`);
   }
 
   postDeck() {
-    return this.httpClient.get<Deck>(`${this.urlapi}/deck/new?jokers_enabled=true`, {});
+    console.log("entrei no PostDeck");
+    return this.httpClient.get<Deck>(`${environment.apiUrl}/deck/new?jokers_enabled=true`, {});
   }
 }

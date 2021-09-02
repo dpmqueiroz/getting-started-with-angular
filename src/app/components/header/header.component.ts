@@ -16,12 +16,11 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
 
   newDeck() {
-    this.apiService
-    .postDeck()
-    .subscribe((deck) => this.onNewDeck.emit(deck));
+    this.onNewDeck.emit();
   }
 
 }

@@ -1,28 +1,22 @@
 import { ApiService } from './../../service/api.service';
-import { Deck, Card } from './../../api.models';
-import { Component, Input, OnInit } from '@angular/core';
+import { Deck, Card, Draw } from './../../api.models';
+import { Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-deck',
   templateUrl: './deck.component.html',
   styleUrls: ['./deck.component.scss']
 })
-export class DeckComponent implements OnInit {
+export class DeckComponent implements OnChanges {
 
-  @Input() deck: Deck = {};
+  @Input() draw!: Draw;
 
   public cards: Card[] = [];
 
-  constructor(private apiService: ApiService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.deckDraw();
-  }
-
-  deckDraw(){
-    this.apiService
-    .getDeckDraw(this.deck.deck_id)
-    .subscribe((draw) => this.cards = draw.cards);
+  ngOnChanges(){
+    this.cards = this.draw.cards;
   }
 
 }

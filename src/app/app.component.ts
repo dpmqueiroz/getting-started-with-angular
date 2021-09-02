@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Deck } from './api.models';
+import { Deck, Draw } from './api.models';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -9,23 +9,19 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class AppComponent implements OnInit{
 
-  public deck: Deck = {};
+  public draw!: Draw;
 
   constructor(
     private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    this.newDeck();
+    this.novoDeck();
   }
 
-  onNewDeck(deck: Deck) {
-    this.deck = deck;
-  }
-
-  newDeck(){
+  novoDeck(){
     this.apiService
-      .postDeck()
-      .subscribe((deck) => this.deck = deck);
+      .getDeckDraw()
+      .subscribe((draw) => this.draw = draw);
   }
 }
